@@ -26,6 +26,7 @@ namespace task4
             LoadData();
             CreateExcel();
             CreateTable();
+
         }
 
         private void CreateTable()
@@ -58,22 +59,20 @@ namespace task4
                 values[counter, 8] = "";
                 counter++;
             }
-            private string GetCell(int x, int y)
-            {
-                string ExcelCoordinate = "";
-                int dividend = y;
-                int modulo;
+            Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
+            headerRange.Font.Bold = true;
+            headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            headerRange.EntireColumn.AutoFit();
+            headerRange.RowHeight = 40;
+            headerRange.Interior.Color = Color.LightBlue;
+            headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
 
-                while (dividend > 0)
-                {
-                    modulo = (dividend - 1) % 26;
-                    ExcelCoordinate = Convert.ToChar(65 + modulo).ToString() + ExcelCoordinate;
-                    dividend = (int)((dividend - modulo) / 26);
-                }
-                ExcelCoordinate += x.ToString();
+        }
 
-                return ExcelCoordinate;
-            }
+        private object GetCell(int v, int length)
+        {
+            throw new NotImplementedException();
         }
 
         private void CreateExcel()
