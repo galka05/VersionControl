@@ -20,7 +20,9 @@ namespace project5
             InitializeComponent();
             Ticks = context.Ticks.ToList();
             dataGridView1.DataSource = Ticks;
+            
 
         }
+
     }
 }
