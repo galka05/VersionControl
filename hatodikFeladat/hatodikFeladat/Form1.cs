@@ -24,13 +24,14 @@ namespace hatodikFeladat
             InitializeComponent();
             GetExchangeRates();
             XlmFeldolg();
-            AdatMegejel();
+            RefreshData();
             dataGridView1.DataSource = Rates;
         }
 
-        private void AdatMegejel()
+        private void RefreshData()
         {
             chartRateData.DataSource = Rates;
+            Rates.Clear();
 
             var series = chartRateData.Series[0];
             series.ChartType = SeriesChartType.Line;
@@ -87,6 +88,21 @@ namespace hatodikFeladat
             var response = mnbService.GetExchangeRates(request);
             var result = response.GetExchangeRatesResult;
 
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshData();
         }
     }
 }
