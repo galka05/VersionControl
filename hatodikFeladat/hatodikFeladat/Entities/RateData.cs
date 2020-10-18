@@ -8,7 +8,8 @@ namespace hatodikFeladat.Entities
 {
     public class RateData
     {
-        public DateTime date { get; set; }  
+        public DateTime date { get; set; }
+        public DateTime Date { get; internal set; }
         public string Currency { get; set; }
         public decimal Value { get; set; }
     }
