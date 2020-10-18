@@ -1,4 +1,5 @@
-﻿using hatodikFeladat.MnbServiceReference;
+﻿using hatodikFeladat.Entities;
+using hatodikFeladat.MnbServiceReference;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,10 +14,13 @@ namespace hatodikFeladat
 {
     public partial class Form1 : Form
     {
+        BindingList<RateData> Rates = new BindingList<RateData>();
+       
         public Form1()
         {
             InitializeComponent();
             GetExchangeRates();
+            dataGridView1.DataSource = Rates;
         }
 
         private void GetExchangeRates()
