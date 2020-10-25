@@ -11,5 +11,6 @@ namespace feladat7.Entities
         public Gender Gender { get; set; }
         public int Age { get; set; }
         public double Probability { get; set; }
+        public object P { get; internal set; }
     }
 }
