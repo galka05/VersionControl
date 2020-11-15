@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using week8.Abstractions;
 using week8.Entities;
 
 
@@ -18,17 +19,16 @@ namespace week8
         private List<Ball> _toys = new List<Ball>();
 
         private BallFactory _factory;
-        public BallFactory Factory
 
-        {
-            get { return _factory; }
-            set { _factory = value; }
-        }
+        public BallFactory GetFactory()
+        { return _factory; }
+        public void SetFactory(BallFactory value)
+        { _factory = value; }
 
         public Form1()
         {
             InitializeComponent();
-            Factory = new BallFactory();
+            SetFactory(new BallFactory());
         }
 
         private void conveyorTimer_Tick(object sender, EventArgs e)
@@ -49,12 +49,36 @@ namespace week8
             }
         }
 
+        private Toy _nextToy;
+
+        private IToyFactory _factory;
+        public IToyFactory Factory
+        {
+            get { return _factory; }
+            set
+            {
+                _factory = value;
+                DisplayNext();
+            }
+        }
+
+
         private void createTimer_Tick(object sender, EventArgs e)
         {
-            var ball = Factory.CreateNew();
+            var ball = GetFactory().CreateNew();
             _toys.Add(ball);
             ball.Left = -ball.Width;
             mainPanel.Controls.Add(ball);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SetFactory(new CarFactory());
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            SetFactory(new BallFactory());
         }
     }
 }
